@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="tablewrap">
+    <table>
+        <thead>
+          <tr>
+            <th>ФИО </th>
+            <th>Количество деталей</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let strkeeper of storeKeepers">
+            
+            <td>{{strkeeper.fio}}</td>
+            <td>{{strkeeper.details?.length}}</td>
+            <td><button (click)="DeleteStoreKeeper(strkeeper.id!)">Delete</button></td>
+          </tr> -->
+    
+          <tr class="border_bottom" *ngFor="let strkeeper of storeKeepersViewModel">
+            
+            <td>{{strkeeper.strKeeperModel?.fio}}</td>
+            <td>{{strkeeper.countOfDetails}}</td>
+            <td><button (click)="DeleteStoreKeeper(strkeeper.strKeeperModel?.id!)">Delete</button></td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="formwrap">
+    <!-- <form [formGroup]="addStrKeeperForm" (submit)="AddStoreKeeper()" >
+        <div class="wrapper">
+            <label >Ф.И.О. кладовщика</label>
+            <input type="text" name="fio" formControlName="fio" /> 
+            <input type="submit" value="Добавить"/>
+        </div>
+    </form> -->
+    <!--  -->
+    <form class="form" [formGroup]="addStrKeeperForm" (submit)="AddStoreKeeper()" >
+      
+      
+      <div class="input-container ic1">
+        <input type="text" class="input" id="fio" name="fio" formControlName="fio" /> 
+        <div class="cut"></div>
+        <label for="fio" class="placeholder">ФИО кладовщика*</label>
+      </div>
+      @if (addStrKeeperForm.controls["fio"].invalid && addStrKeeperForm.controls["fio"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+     
+        <input class="submit" [disabled]="addStrKeeperForm.invalid" type="submit" value="Добавить"/>
+        
+    </form>
+    <!--  -->
+  </div>
+</div>
+
+
+  

@@ -1,0 +1,95 @@
+
+<div class="wrapper">
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Номенклатурный код </th>
+          <th>Наименование </th>
+          <th>Количество </th>
+          <th>Кладовщик </th>
+          <th>Дата создания </th>
+          <th>Дата удаления </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border_bottom" *ngFor="let detail of details">
+          
+          <td>{{detail.nomenclCode}}</td>
+          <td>{{detail.detailName}}</td>
+          <td>{{detail.detailCount}}</td>
+          <td>{{detail.storekeeper?.fio}}</td>
+          <td>{{detail.dateOfCreation}}</td>
+          <td>{{detail.dateOfRemoving}}</td>
+          <td><button (click)="DeleteDetail(detail.id!)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="formwrap">
+
+    <form class="form" [formGroup]="addDetailForm" (submit)="AddDetail()" >
+      
+      
+      <div class="input-container ic1">
+        <input type="text" class="input" id="nomenclCode" name="nomenclCode" formControlName="nomenclCode" /> 
+        <div class="cut"></div>
+        <label for="nomenclCode" class="placeholder">Код номенклатуры*</label>
+      </div>
+      @if (addDetailForm.controls["nomenclCode"].invalid && addDetailForm.controls["nomenclCode"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+      <div class="input-container ic2">
+        <input type="text" class="input" id="detailName" name="detailName" formControlName="detailName" /> 
+        <div class="cut"></div>
+        <label for="detailName" class="placeholder">Название детали*</label>
+      </div>
+      @if (addDetailForm.controls["detailName"].invalid && addDetailForm.controls["detailName"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+      <div class="input-container ic2">
+        <input type="number" class="input" name="detailCount" formControlName="detailCount" /> 
+        <div class="cut"></div>
+        <label for="detailCount" class="placeholder">Кол-во деталей*</label>
+      </div>
+      @if (addDetailForm.controls["detailCount"].invalid && addDetailForm.controls["detailCount"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+      <div class="input-container ic2">
+        <div  class="box">
+          <select class="form-style" id="storekeeperid"  placeholder="Выберите кладовщика" formControlName="storekeeperid" name="storekeeperid">
+            
+            <option *ngFor="let storekeeper of storekeepers" value="{{storekeeper.id}}" >{{storekeeper.fio}}</option>
+          </select>
+          
+        </div>
+      </div>
+      @if (addDetailForm.controls["storekeeperid"].invalid && addDetailForm.controls["storekeeperid"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+      <div class="input-container ic2">
+        <input type="date" id="dateOfCreation" class="input" name="dateOfCreation" formControlName="dateOfCreation" /> 
+        <div class="cut"></div>
+        <label for="dateOfCreation" class="placeholder">Дата создания*</label>
+      </div>
+      @if (addDetailForm.controls["dateOfCreation"].invalid && addDetailForm.controls["dateOfCreation"].touched
+
+      ) { <div class="alert">Заполните поле</div>}
+        <input class="submit" [disabled]="addDetailForm.invalid" type="submit" value="Добавить"/>
+        
+        
+    </form>
+  </div>
+    
+</div>
+
+    
+    <!-- <input type="text" name="nomenclCode" formControlName="nomenclCode" /> 
+    <input type="text" name="detailName" formControlName="detailName" /> 
+    <input type="number" name="detailCount" formControlName="detailCount" /> 
+    <select class="form-style" placeholder="Выберите кладовщика"  [selectedIndex]="" formControlName="storekeeperid" name="storekeeperid">
+        <option *ngFor="let storekeeper of storekeepers" value="{{storekeeper.id}}">{{storekeeper.fio}}</option>
+    </select>
+    <input type="date" name="dateOfCreation" formControlName="dateOfCreation" />  -->
+    
